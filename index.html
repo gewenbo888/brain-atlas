@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Atlas — The Complete Guide to the Human Brain</title>
+<meta name="description" content="Comprehensive bilingual guide to the human brain: genes, neurons, neurotransmitters, brain regions, mental disorders, psychology, brain-computer interfaces, and consciousness. 人脑完全图谱。">
+<meta property="og:title" content="Brain Atlas — 人脑完全图谱">
+<meta property="og:description" content="Genes, neurons, neurotransmitters, disorders, psychology, brain chips, and consciousness.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script defer src="https://analytics-dashboard-two-blue.vercel.app/tracker.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@200;300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#100c18;--bg2:#161220;--bg3:#1c1828;
+  --text:#d8d0e4;--dim:#706888;--faint:#2a2440;
+  --pink:#e8a0c8;--blue:#80b0e8;--green:#a8e0a0;--amber:#e8c880;
+  --red:#e88080;--purple:#b090e8;--teal:#80d8c8;
+  --pink-bg:rgba(232,160,200,.06);--blue-bg:rgba(128,176,232,.06);
+  --green-bg:rgba(168,224,160,.06);--amber-bg:rgba(232,200,128,.06);
+  --red-bg:rgba(232,128,128,.06);--purple-bg:rgba(176,144,232,.06);
+  --teal-bg:rgba(128,216,200,.06);
+  --rule:rgba(216,208,228,.04);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;font-weight:300;line-height:1.75;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.012;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:256px;
+}
+.cn{font-family:'Noto Sans SC',sans-serif;}
+h1,h2,h3{font-family:'Lora',serif;font-weight:400;}
+a{color:var(--pink);text-decoration:none;}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.3s}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  background:rgba(16,12,24,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--rule);height:48px;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+nav::-webkit-scrollbar{display:none;}
+.nav-tab{
+  font-size:.6rem;font-weight:500;letter-spacing:.04em;
+  padding:6px 12px;border-radius:7px;cursor:pointer;
+  transition:all .15s;text-decoration:none;color:var(--dim);flex-shrink:0;
+}
+.nav-tab:hover{color:var(--text);background:rgba(255,255,255,.04);}
+.nav-tab.active{color:#fff;background:rgba(255,255,255,.06);}
+
+section{max-width:1200px;margin:0 auto;padding:80px 40px;position:relative;z-index:1;}
+@media(max-width:700px){section{padding:50px 16px;}}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.01em;margin-bottom:.3rem;}
+.h2cn{font-family:'Noto Sans SC',sans-serif;font-weight:200;font-size:clamp(.82rem,1.4vw,1rem);color:var(--dim);margin-bottom:2rem;}
+
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+.hero-z{position:relative;z-index:2;}
+h1.hero-t{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:400;line-height:1.12;letter-spacing:-.02em;}
+.hero-cn{font-family:'Noto Sans SC',sans-serif;font-weight:200;font-size:clamp(1rem,2vw,1.3rem);color:var(--dim);margin-top:8px;}
+.hero-desc{max-width:560px;margin-top:20px;font-size:.92rem;color:var(--dim);}
+
+/* ═══ CARD GRID ═══ */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+@media(max-width:500px){.card-grid{grid-template-columns:1fr;}}
+
+.card{
+  background:var(--bg2);border:1px solid var(--faint);border-radius:14px;
+  padding:24px 22px;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .2s,box-shadow .3s;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.3);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cc);opacity:.4;transition:opacity .3s;}
+.card:hover::before{opacity:.8;}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.card-icon{font-size:1.2rem;}
+.card-name{font-weight:600;font-size:.88rem;}
+.card-cn{font-family:'Noto Sans SC',sans-serif;font-weight:300;font-size:.72rem;color:var(--dim);}
+.card p{font-size:.82rem;color:rgba(216,208,228,.65);line-height:1.7;}
+.card .cn-text{font-family:'Noto Sans SC',sans-serif;font-size:.75rem;color:rgba(216,208,228,.3);margin-top:6px;line-height:1.8;}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.card-tag{
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  padding:3px 9px;border-radius:4px;
+  background:rgba(255,255,255,.03);border:1px solid var(--faint);color:var(--dim);
+}
+
+/* Color classes */
+.c-pink{--cc:var(--pink);}.c-blue{--cc:var(--blue);}.c-green{--cc:var(--green);}
+.c-amber{--cc:var(--amber);}.c-red{--cc:var(--red);}.c-purple{--cc:var(--purple);}
+.c-teal{--cc:var(--teal);}
+
+/* ═══ TABLE ═══ */
+.table-wrap{overflow-x:auto;border:1px solid var(--faint);border-radius:14px;background:var(--bg2);margin-top:28px;}
+table{width:100%;border-collapse:collapse;min-width:700px;font-size:.8rem;}
+table th{
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:12px 14px;text-align:left;
+  border-bottom:2px solid var(--faint);color:var(--dim);
+  position:sticky;top:0;background:var(--bg3);z-index:5;
+}
+table td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6;}
+table tr:hover td{background:rgba(232,160,200,.015);}
+.td-name{font-weight:500;white-space:nowrap;}
+.td-cn{font-family:'Noto Sans SC',sans-serif;font-weight:200;font-size:.68rem;color:var(--dim);display:block;}
+
+/* ═══ FOOTER ═══ */
+footer{text-align:center;padding:50px 40px;border-top:1px solid var(--rule);max-width:1200px;margin:0 auto;}
+footer p{font-size:.72rem;color:var(--dim);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-tab" href="#genes">Genes</a>
+  <a class="nav-tab" href="#neurons">Neurons</a>
+  <a class="nav-tab" href="#neuro-t">Transmitters</a>
+  <a class="nav-tab" href="#regions">Regions</a>
+  <a class="nav-tab" href="#disorders">Disorders</a>
+  <a class="nav-tab" href="#psychology">Psychology</a>
+  <a class="nav-tab" href="#bci">Brain Chips</a>
+  <a class="nav-tab" href="#consciousness">Consciousness</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-z">
+    <div class="sec-label rv" style="color:var(--pink);">Comprehensive Guide 完全图谱</div>
+    <h1 class="hero-t rv d1">Brain Atlas</h1>
+    <div class="hero-cn rv d2">人脑完全图谱 — 从基因到意识</div>
+    <p class="hero-desc rv d3">
+      A panoramic journey through the human brain — from the genes that build it, the neurons that fire within it,
+      the chemistry that moves it, to the consciousness that emerges from it.
+    </p>
+    <p class="hero-desc rv d3 cn" style="font-size:.82rem;opacity:.4;margin-top:.6rem;">
+      穿越人脑的全景之旅——从构建它的基因、其中放电的神经元、驱动它的化学物质，到从中涌现的意识。
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 1. GENES ═══ -->
+<section id="genes">
+  <div class="sec-label rv" style="color:var(--green);">01 — Genetics 基因</div>
+  <h2 class="rv d1">The Genetic Blueprint</h2>
+  <div class="h2cn rv d2">大脑的遗传蓝图 — 塑造神经系统的关键基因</div>
+
+  <div class="card-grid">
+    <div class="card c-green rv"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">BDNF</div><div class="card-cn">脑源性神经营养因子</div></div></div><p>Brain-Derived Neurotrophic Factor — the "fertilizer" for neurons. Promotes growth, survival, and plasticity of neurons. Low BDNF is linked to depression, Alzheimer's, and schizophrenia.</p><div class="cn-text">脑源性神经营养因子——神经元的"肥料"。促进神经元的生长、存活和可塑性。低BDNF与抑郁症、阿尔茨海默病和精神分裂症相关。</div><div class="card-tags"><span class="card-tag">Plasticity</span><span class="card-tag">Depression</span><span class="card-tag">Memory</span></div></div>
+
+    <div class="card c-green rv d1"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">COMT</div><div class="card-cn">儿茶酚-O-甲基转移酶</div></div></div><p>Catechol-O-methyltransferase — breaks down dopamine in the prefrontal cortex. The Val/Met polymorphism creates "warriors" (stress-resilient) vs "worriers" (better at planning).</p><div class="cn-text">儿茶酚-O-甲基转移酶——在前额叶皮层中分解多巴胺。Val/Met多态性产生"战士"（抗压型）vs"忧虑者"（善于规划型）。</div><div class="card-tags"><span class="card-tag">Dopamine</span><span class="card-tag">Cognition</span><span class="card-tag">Stress</span></div></div>
+
+    <div class="card c-green rv d2"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">APOE</div><div class="card-cn">载脂蛋白E</div></div></div><p>Apolipoprotein E — the strongest genetic risk factor for Alzheimer's disease. APOE4 carriers have 3-15x higher risk. APOE2 is protective. Affects cholesterol transport in the brain.</p><div class="cn-text">载脂蛋白E——阿尔茨海默病最强的遗传风险因子。APOE4携带者风险高3-15倍。APOE2具有保护作用。影响大脑中的胆固醇运输。</div><div class="card-tags"><span class="card-tag">Alzheimer's</span><span class="card-tag">Cholesterol</span><span class="card-tag">Risk gene</span></div></div>
+
+    <div class="card c-green rv"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">5-HTTLPR</div><div class="card-cn">血清素转运体基因</div></div></div><p>Serotonin transporter gene — the "short" allele reduces serotonin reuptake and is associated with higher anxiety sensitivity, emotional reactivity, and depression risk under stress.</p><div class="cn-text">血清素转运体基因——"短"等位基因降低血清素再摄取，与更高的焦虑敏感性、情绪反应性和压力下的抑郁风险相关。</div><div class="card-tags"><span class="card-tag">Serotonin</span><span class="card-tag">Anxiety</span><span class="card-tag">Mood</span></div></div>
+
+    <div class="card c-green rv d1"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">FOXP2</div><div class="card-cn">叉头框蛋白P2</div></div></div><p>The "language gene" — mutations cause severe speech disorders. Unique human variant appeared ~200,000 years ago. Also found in songbirds, suggesting deep evolutionary roots of vocal learning.</p><div class="cn-text">"语言基因"——突变导致严重语言障碍。人类独特变体约20万年前出现。也见于鸣禽，暗示声音学习的深层进化根源。</div><div class="card-tags"><span class="card-tag">Language</span><span class="card-tag">Speech</span><span class="card-tag">Evolution</span></div></div>
+
+    <div class="card c-green rv d2"><div class="card-head"><span class="card-icon">&#129516;</span><div><div class="card-name">MAOA</div><div class="card-cn">单胺氧化酶A</div></div></div><p>Monoamine oxidase A — breaks down serotonin, dopamine, and norepinephrine. The low-activity variant (MAOA-L), when combined with childhood abuse, is associated with increased aggression. Called the "warrior gene."</p><div class="cn-text">单胺氧化酶A——分解血清素、多巴胺和去甲肾上腺素。低活性变体（MAOA-L）与童年虐待结合时，与攻击性增加相关。被称为"战士基因"。</div><div class="card-tags"><span class="card-tag">Aggression</span><span class="card-tag">Monoamines</span><span class="card-tag">Behavior</span></div></div>
+  </div>
+</section>
+
+<!-- ═══ 2. NEURONS ═══ -->
+<section id="neurons">
+  <div class="sec-label rv" style="color:var(--blue);">02 — Neurons 神经元</div>
+  <h2 class="rv d1">The Cellular Machinery</h2>
+  <div class="h2cn rv d2">细胞机器 — 860亿个神经元与支持细胞</div>
+
+  <div class="card-grid">
+    <div class="card c-blue rv"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Pyramidal Neurons</div><div class="card-cn">锥体神经元</div></div></div><p>The workhorses of the cortex. Excitatory neurons with triangle-shaped cell bodies that form the majority of cortical neurons (~70-80%). They transmit signals over long distances and are the basis of thought, perception, and voluntary movement.</p><div class="cn-text">大脑皮层的主力。兴奋性神经元，三角形细胞体，占皮层神经元的大多数（约70-80%）。远距离传输信号，是思维、感知和自主运动的基础。</div></div>
+
+    <div class="card c-blue rv d1"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Interneurons</div><div class="card-cn">中间神经元</div></div></div><p>The brain's traffic controllers. Inhibitory neurons (mostly GABAergic) that regulate neural circuits, prevent runaway excitation, and create the rhythmic oscillations (brain waves) essential for consciousness.</p><div class="cn-text">大脑的交通控制者。抑制性神经元（主要为GABA能），调节神经回路，防止兴奋失控，创造对意识至关重要的节律振荡（脑电波）。</div></div>
+
+    <div class="card c-blue rv d2"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Mirror Neurons</div><div class="card-cn">镜像神经元</div></div></div><p>Fire both when you perform an action and when you observe someone else performing it. Discovered in macaques (1990s). Believed to underpin empathy, imitation learning, language acquisition, and theory of mind.</p><div class="cn-text">在你执行动作和观察他人执行动作时都会放电。在猕猴中发现（1990年代）。被认为是共情、模仿学习、语言习得和心智理论的基础。</div></div>
+
+    <div class="card c-blue rv"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Glial Cells</div><div class="card-cn">神经胶质细胞</div></div></div><p>Outnumber neurons ~1:1. Astrocytes regulate synapses and the blood-brain barrier. Oligodendrocytes create myelin insulation. Microglia are the brain's immune system. Once thought passive — now known to actively shape cognition.</p><div class="cn-text">与神经元数量大致相当。星形胶质细胞调节突触和血脑屏障。少突胶质细胞形成髓鞘。小胶质细胞是大脑的免疫系统。曾被认为是被动的——现已知积极塑造认知。</div></div>
+
+    <div class="card c-blue rv d1"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Place &amp; Grid Cells</div><div class="card-cn">位置细胞与网格细胞</div></div></div><p>The brain's GPS. Place cells (hippocampus) fire at specific locations. Grid cells (entorhinal cortex) form a hexagonal coordinate system. Nobel Prize 2014 (O'Keefe, Moser &amp; Moser). Basis of spatial memory and navigation.</p><div class="cn-text">大脑的GPS。位置细胞（海马体）在特定位置放电。网格细胞（内嗅皮层）形成六边形坐标系。2014年诺贝尔奖。空间记忆和导航的基础。</div></div>
+
+    <div class="card c-blue rv d2"><div class="card-head"><span class="card-icon">&#9889;</span><div><div class="card-name">Von Economo Neurons</div><div class="card-cn">冯·埃科诺莫神经元</div></div></div><p>Large spindle-shaped neurons found only in great apes, elephants, and whales. Located in the anterior cingulate and insula. Linked to social awareness, empathy, and self-recognition. May be the "neurons of consciousness."</p><div class="cn-text">仅在类人猿、大象和鲸鱼中发现的大型梭形神经元。位于前扣带皮层和岛叶。与社会意识、共情和自我识别相关。可能是"意识的神经元"。</div></div>
+  </div>
+</section>
+
+<!-- ═══ 3. NEUROTRANSMITTERS ═══ -->
+<section id="neuro-t">
+  <div class="sec-label rv" style="color:var(--amber);">03 — Neurotransmitters 神经递质</div>
+  <h2 class="rv d1">The Chemical Messengers</h2>
+  <div class="h2cn rv d2">化学信使 — 驱动情绪、思维和行为的分子</div>
+
+  <div class="table-wrap rv d1">
+    <table>
+      <thead><tr><th>Transmitter</th><th>Function 功能</th><th>Too Little 不足</th><th>Too Much 过多</th><th>Related Drugs 相关药物</th></tr></thead>
+      <tbody>
+        <tr><td class="td-name">Dopamine<span class="td-cn">多巴胺</span></td><td>Reward, motivation, motor control, learning</td><td>Parkinson's, depression, ADHD</td><td>Schizophrenia, mania, addiction</td><td>L-DOPA, Adderall, antipsychotics</td></tr>
+        <tr><td class="td-name">Serotonin (5-HT)<span class="td-cn">血清素</span></td><td>Mood, sleep, appetite, social behavior</td><td>Depression, anxiety, OCD</td><td>Serotonin syndrome (fatal)</td><td>SSRIs (Prozac, Zoloft), MDMA</td></tr>
+        <tr><td class="td-name">Norepinephrine<span class="td-cn">去甲肾上腺素</span></td><td>Alertness, attention, fight-or-flight</td><td>Depression, fatigue, ADHD</td><td>Anxiety, hypertension, panic</td><td>SNRIs, beta-blockers</td></tr>
+        <tr><td class="td-name">GABA<span class="td-cn">γ-氨基丁酸</span></td><td>Primary inhibition — calms neural activity</td><td>Anxiety, epilepsy, insomnia</td><td>Sedation, coma</td><td>Benzodiazepines, barbiturates, alcohol</td></tr>
+        <tr><td class="td-name">Glutamate<span class="td-cn">谷氨酸</span></td><td>Primary excitation — learning &amp; memory</td><td>Cognitive impairment</td><td>Excitotoxicity, seizures, neurodegeneration</td><td>Ketamine, memantine</td></tr>
+        <tr><td class="td-name">Acetylcholine<span class="td-cn">乙酰胆碱</span></td><td>Memory, attention, muscle activation</td><td>Alzheimer's, myasthenia gravis</td><td>Excessive salivation, cramps</td><td>Donepezil, nicotine</td></tr>
+        <tr><td class="td-name">Endorphins<span class="td-cn">内啡肽</span></td><td>Pain relief, euphoria, stress response</td><td>Chronic pain, depression</td><td>Insensitivity to pain</td><td>Opioids (morphine, fentanyl)</td></tr>
+        <tr><td class="td-name">Oxytocin<span class="td-cn">催产素</span></td><td>Social bonding, trust, maternal behavior</td><td>Social anxiety, autism traits</td><td>Oversensitivity, jealousy</td><td>Synthetic oxytocin (Pitocin)</td></tr>
+        <tr><td class="td-name">Anandamide<span class="td-cn">花生四烯酸乙醇胺</span></td><td>Endocannabinoid — mood, pain, appetite</td><td>Anxiety, inflammation</td><td>Impaired memory</td><td>Cannabis (THC mimics this)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 4. BRAIN REGIONS ═══ -->
+<section id="regions">
+  <div class="sec-label rv" style="color:var(--pink);">04 — Brain Regions 脑区</div>
+  <h2 class="rv d1">The Architecture of Mind</h2>
+  <div class="h2cn rv d2">心智的建筑 — 主要脑区与其功能</div>
+
+  <div class="card-grid">
+    <div class="card c-pink rv"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Prefrontal Cortex</div><div class="card-cn">前额叶皮层</div></div></div><p>The CEO of the brain. Executive function, decision-making, planning, impulse control, personality. Last region to mature (~25 years old). Damaged in Phineas Gage (1848) — personality completely changed.</p><div class="cn-text">大脑的CEO。执行功能、决策、规划、冲动控制、人格。最后成熟的脑区（约25岁）。菲尼亚斯·盖奇（1848）损伤后人格完全改变。</div></div>
+
+    <div class="card c-pink rv d1"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Hippocampus</div><div class="card-cn">海马体</div></div></div><p>The memory encoder. Converts short-term memories to long-term. London taxi drivers have enlarged hippocampi. Patient H.M. lost the ability to form new memories after bilateral removal (1953).</p><div class="cn-text">记忆编码器。将短期记忆转化为长期记忆。伦敦出租车司机的海马体更大。H.M.患者双侧切除后丧失了形成新记忆的能力（1953）。</div></div>
+
+    <div class="card c-pink rv d2"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Amygdala</div><div class="card-cn">杏仁核</div></div></div><p>The fear center. Processes emotions, especially fear and aggression. Triggers the fight-or-flight response before conscious awareness. People with amygdala damage (Urbach-Wiethe disease) literally cannot feel fear.</p><div class="cn-text">恐惧中心。处理情绪，特别是恐惧和攻击。在有意识之前触发战或逃反应。杏仁核损伤者（Urbach-Wiethe病）真的无法感到恐惧。</div></div>
+
+    <div class="card c-pink rv"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Cerebellum</div><div class="card-cn">小脑</div></div></div><p>Contains more neurons than the rest of the brain combined (~69 billion). Coordinates movement, balance, motor learning, and increasingly recognized for roles in cognition, emotion, and language.</p><div class="cn-text">包含比大脑其余部分更多的神经元（约690亿）。协调运动、平衡、运动学习，且越来越多地被认为在认知、情绪和语言中发挥作用。</div></div>
+
+    <div class="card c-pink rv d1"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Broca's &amp; Wernicke's Areas</div><div class="card-cn">布罗卡区与韦尼克区</div></div></div><p>The language network. Broca's (left frontal) controls speech production — damage causes non-fluent aphasia. Wernicke's (left temporal) handles comprehension — damage causes fluent but meaningless speech.</p><div class="cn-text">语言网络。布罗卡区（左额叶）控制言语产生——损伤导致非流利失语症。韦尼克区（左颞叶）处理理解——损伤导致流利但无意义的言语。</div></div>
+
+    <div class="card c-pink rv d2"><div class="card-head"><span class="card-icon">&#128064;</span><div><div class="card-name">Default Mode Network</div><div class="card-cn">默认模式网络</div></div></div><p>Active when you're not focused on the outside world — daydreaming, self-reflection, mind-wandering. Disrupted in autism, depression, and Alzheimer's. Discovered by Marcus Raichle (2001). The "dark energy" of the brain.</p><div class="cn-text">当你不专注于外部世界时活跃——白日梦、自我反思、走神。在自闭症、抑郁症和阿尔茨海默病中被破坏。由Marcus Raichle发现（2001）。大脑的"暗能量"。</div></div>
+  </div>
+</section>
+
+<!-- ═══ 5. DISORDERS ═══ -->
+<section id="disorders">
+  <div class="sec-label rv" style="color:var(--red);">05 — Mental Disorders 精神障碍</div>
+  <h2 class="rv d1">When the Brain Breaks</h2>
+  <div class="h2cn rv d2">当大脑出故障时 — 主要精神与神经疾病</div>
+
+  <div class="table-wrap rv d1">
+    <table>
+      <thead><tr><th>Disorder 疾病</th><th>Prevalence 患病率</th><th>Mechanism 机制</th><th>Key Symptoms 关键症状</th><th>Treatment 治疗</th></tr></thead>
+      <tbody>
+        <tr><td class="td-name">Depression<span class="td-cn">抑郁症</span></td><td>~280M globally</td><td>Serotonin/norepinephrine deficit, neuroinflammation, HPA axis dysfunction</td><td>Persistent sadness, anhedonia, fatigue, sleep changes</td><td>SSRIs, CBT, ketamine, TMS, exercise</td></tr>
+        <tr><td class="td-name">Anxiety Disorders<span class="td-cn">焦虑症</span></td><td>~300M globally</td><td>Amygdala hyperactivity, GABA deficit, serotonin imbalance</td><td>Excessive worry, panic attacks, avoidance</td><td>SSRIs, benzodiazepines, CBT, exposure therapy</td></tr>
+        <tr><td class="td-name">Schizophrenia<span class="td-cn">精神分裂症</span></td><td>~24M globally</td><td>Dopamine hyperactivity (mesolimbic), glutamate dysfunction, reduced gray matter</td><td>Hallucinations, delusions, disorganized thinking</td><td>Antipsychotics, clozapine, CBT</td></tr>
+        <tr><td class="td-name">Alzheimer's<span class="td-cn">阿尔茨海默病</span></td><td>~55M with dementia</td><td>Amyloid-β plaques, tau tangles, cholinergic neuron death, neuroinflammation</td><td>Memory loss, confusion, personality change</td><td>Cholinesterase inhibitors, lecanemab (new)</td></tr>
+        <tr><td class="td-name">ADHD<span class="td-cn">注意力缺陷多动障碍</span></td><td>~5-7% children, ~2.5% adults</td><td>Dopamine/norepinephrine deficit in prefrontal cortex</td><td>Inattention, hyperactivity, impulsivity</td><td>Stimulants (methylphenidate), atomoxetine, CBT</td></tr>
+        <tr><td class="td-name">Autism Spectrum<span class="td-cn">自闭症谱系</span></td><td>~1 in 100</td><td>Altered connectivity, synaptic pruning differences, genetic (100s of genes)</td><td>Social communication challenges, repetitive behaviors, intense interests</td><td>Behavioral therapy, speech therapy, support</td></tr>
+        <tr><td class="td-name">Parkinson's<span class="td-cn">帕金森病</span></td><td>~10M globally</td><td>Dopaminergic neuron death in substantia nigra, Lewy bodies</td><td>Tremor, rigidity, bradykinesia, postural instability</td><td>L-DOPA, deep brain stimulation</td></tr>
+        <tr><td class="td-name">PTSD<span class="td-cn">创伤后应激障碍</span></td><td>~3.9% globally</td><td>Amygdala hyperactivation, hippocampal shrinkage, prefrontal hypoactivity</td><td>Flashbacks, hypervigilance, avoidance, nightmares</td><td>EMDR, prolonged exposure, SSRIs, MDMA-assisted (new)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 6. PSYCHOLOGY ═══ -->
+<section id="psychology">
+  <div class="sec-label rv" style="color:var(--purple);">06 — Psychology 心理学</div>
+  <h2 class="rv d1">The Science of Mind &amp; Behavior</h2>
+  <div class="h2cn rv d2">心智与行为的科学 — 重要理论与发现</div>
+
+  <div class="card-grid">
+    <div class="card c-purple rv"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">Cognitive Biases</div><div class="card-cn">认知偏差</div></div></div><p><strong>Confirmation bias</strong> — seek info that confirms beliefs. <strong>Dunning-Kruger</strong> — incompetent people overestimate ability. <strong>Anchoring</strong> — first number heard dominates judgment. <strong>Loss aversion</strong> — losses hurt 2x more than equivalent gains.</p><div class="cn-text">确认偏差——寻找确认信念的信息。邓宁-克鲁格——无能者高估能力。锚定效应——首先听到的数字主导判断。损失厌恶——损失的痛苦是等额收益快乐的2倍。</div></div>
+
+    <div class="card c-purple rv d1"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">Maslow's Hierarchy</div><div class="card-cn">马斯洛需求层次</div></div></div><p>Five tiers of human needs: <strong>Physiological</strong> → <strong>Safety</strong> → <strong>Love/Belonging</strong> → <strong>Esteem</strong> → <strong>Self-actualization</strong>. Lower needs must be met before pursuing higher ones. Criticized but remains the most widely-known motivation framework.</p><div class="cn-text">人类需求五层次：生理→安全→爱与归属→尊重→自我实现。低层需求须先满足才能追求高层。虽受批评但仍是最广为人知的动机框架。</div></div>
+
+    <div class="card c-purple rv d2"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">Attachment Theory</div><div class="card-cn">依恋理论</div></div></div><p>Bowlby &amp; Ainsworth: infant–caregiver bonds shape adult relationships. <strong>Secure</strong> (~60%), <strong>anxious-preoccupied</strong> (~20%), <strong>avoidant</strong> (~25%), <strong>disorganized</strong> (~5%). Early attachment predicts romantic and social patterns for life.</p><div class="cn-text">鲍尔比与安斯沃思：婴儿-照护者的纽带塑造成年关系。安全型（约60%）、焦虑型（约20%）、回避型（约25%）、混乱型（约5%）。早期依恋预测终生的恋爱和社交模式。</div></div>
+
+    <div class="card c-purple rv"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">Flow State</div><div class="card-cn">心流状态</div></div></div><p>Csikszentmihalyi (1990): optimal experience when challenge perfectly matches skill. Time perception dissolves, self-consciousness disappears. Prefrontal cortex partially deactivates (transient hypofrontality). The neuroscience of "being in the zone."</p><div class="cn-text">契克森米哈赖（1990）：当挑战与技能完美匹配时的最佳体验。时间感消融，自我意识消失。前额叶皮层部分失活（短暂性低额叶活动）。"进入状态"的神经科学。</div></div>
+
+    <div class="card c-purple rv d1"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">Neuroplasticity</div><div class="card-cn">神经可塑性</div></div></div><p>The brain rewires itself throughout life. London cabbies grow larger hippocampi. Meditators thicken their prefrontal cortex. Stroke patients can reroute functions to undamaged areas. "Neurons that fire together wire together" (Hebb's rule).</p><div class="cn-text">大脑终生自我重塑。伦敦出租车司机的海马体更大。冥想者的前额叶皮层增厚。中风患者可将功能重新路由到未受损区域。"一起放电的神经元连在一起"（赫布法则）。</div></div>
+
+    <div class="card c-purple rv d2"><div class="card-head"><span class="card-icon">&#128161;</span><div><div class="card-name">The Big Five (OCEAN)</div><div class="card-cn">大五人格模型</div></div></div><p>The most validated personality model: <strong>Openness</strong>, <strong>Conscientiousness</strong>, <strong>Extraversion</strong>, <strong>Agreeableness</strong>, <strong>Neuroticism</strong>. ~50% heritable, ~50% environmental. Predicts job performance, relationship success, health outcomes, and lifespan.</p><div class="cn-text">最经过验证的人格模型：开放性、尽责性、外向性、宜人性、神经质。约50%遗传，50%环境。预测工作表现、关系成功、健康结果和寿命。</div></div>
+  </div>
+</section>
+
+<!-- ═══ 7. BRAIN-COMPUTER INTERFACE ═══ -->
+<section id="bci">
+  <div class="sec-label rv" style="color:var(--teal);">07 — Brain-Computer Interface 脑机接口</div>
+  <h2 class="rv d1">Merging Mind &amp; Machine</h2>
+  <div class="h2cn rv d2">心智与机器的融合 — 从EEG到Neuralink</div>
+
+  <div class="card-grid">
+    <div class="card c-teal rv"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">EEG (Non-invasive)</div><div class="card-cn">脑电图（非侵入式）</div></div></div><p>Electrodes on the scalp read brain waves. Low resolution but safe. Used in sleep studies, epilepsy diagnosis, and consumer devices (Muse, Emotiv). Can detect attention, drowsiness, and basic intent.</p><div class="cn-text">头皮上的电极读取脑电波。分辨率低但安全。用于睡眠研究、癫痫诊断和消费设备（Muse、Emotiv）。可检测注意力、困倦和基本意图。</div></div>
+
+    <div class="card c-teal rv d1"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">Neuralink (Invasive)</div><div class="card-cn">Neuralink（侵入式）</div></div></div><p>Elon Musk's brain chip. 1,024 electrodes on flexible threads implanted by robotic surgery. First human patient (Noland Arbaugh, 2024) controls computers with thought alone. Targeting paralysis, blindness, and eventually human-AI symbiosis.</p><div class="cn-text">马斯克的脑芯片。1024个电极在柔性线上，由机器人手术植入。首位人类患者（Noland Arbaugh, 2024）仅用思想控制电脑。目标是瘫痪、失明，最终实现人机共生。</div></div>
+
+    <div class="card c-teal rv d2"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">Utah Array</div><div class="card-cn">犹他阵列</div></div></div><p>The current clinical standard. 100-electrode silicon grid implanted on cortex. BrainGate trials enabled paralyzed patients to type, browse the web, and control robotic arms since 2004. Limited lifespan (~5 years) due to scar tissue.</p><div class="cn-text">当前的临床标准。100电极硅网格植入皮层。BrainGate试验自2004年以来使瘫痪患者能够打字、浏览网页和控制机械臂。因疤痕组织寿命有限（约5年）。</div></div>
+
+    <div class="card c-teal rv"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">Stentrode (Endovascular)</div><div class="card-cn">血管支架电极</div></div></div><p>Synchron's breakthrough: a stent-based electrode inserted via blood vessels — no open brain surgery. Implanted in the jugular vein, sits inside the superior sagittal sinus. Patients with ALS can text and browse with thought.</p><div class="cn-text">Synchron的突破：通过血管插入的支架电极——无需开颅手术。通过颈静脉植入，位于上矢状窦内。ALS患者可用思想发短信和浏览。</div></div>
+
+    <div class="card c-teal rv d1"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">Optogenetics</div><div class="card-cn">光遗传学</div></div></div><p>Control neurons with light. Genetically modify neurons to express light-sensitive proteins, then activate/silence them with fiber optic lasers. Millisecond precision. Revolutionized neuroscience research. Human trials beginning for blindness.</p><div class="cn-text">用光控制神经元。基因修饰神经元使其表达光敏蛋白，然后用光纤激光器激活/沉默它们。毫秒级精度。革命性地改变了神经科学研究。针对失明的人体试验已开始。</div></div>
+
+    <div class="card c-teal rv d2"><div class="card-head"><span class="card-icon">&#128268;</span><div><div class="card-name">The Future: Full Bandwidth</div><div class="card-cn">未来：全带宽</div></div></div><p>The endgame: millions of electrodes reading and writing to the brain simultaneously. Direct brain-to-brain communication. Memory upload/download. Sensory augmentation. Merging with AI. Timeline: L3 (bidirectional) → L4 (clinical) → L5 (symbiosis).</p><div class="cn-text">终局：数百万电极同时读写大脑。直接脑对脑通信。记忆上传/下载。感官增强。与AI融合。时间线：L3（双向）→L4（临床）→L5（共生）。</div></div>
+  </div>
+</section>
+
+<!-- ═══ 8. CONSCIOUSNESS ═══ -->
+<section id="consciousness">
+  <div class="sec-label rv" style="color:var(--amber);">08 — Consciousness 意识</div>
+  <h2 class="rv d1">The Hard Problem</h2>
+  <div class="h2cn rv d2">困难问题 — 为什么物质产生了主观体验？</div>
+
+  <div class="card-grid">
+    <div class="card c-amber rv"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">Integrated Information Theory (IIT)</div><div class="card-cn">整合信息理论</div></div></div><p>Giulio Tononi's theory: consciousness = integrated information (Φ, "phi"). Any system that integrates information has some degree of consciousness. A thermostat has minimal Φ. Your brain has enormous Φ. Controversial but mathematically rigorous.</p><div class="cn-text">朱利奥·托诺尼的理论：意识=整合信息（Φ，"phi"）。任何整合信息的系统都有某种程度的意识。恒温器有极小的Φ。你的大脑有巨大的Φ。有争议但数学上严谨。</div></div>
+
+    <div class="card c-amber rv d1"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">Global Workspace Theory</div><div class="card-cn">全局工作空间理论</div></div></div><p>Bernard Baars: consciousness is a "spotlight" that broadcasts information globally across the brain. Unconscious processes are parallel and modular; conscious experience arises when information enters the global workspace and becomes available to all systems.</p><div class="cn-text">伯纳德·巴尔斯：意识是一个将信息全局广播到大脑各处的"聚光灯"。无意识过程是并行和模块化的；当信息进入全局工作空间并对所有系统可用时，意识体验产生。</div></div>
+
+    <div class="card c-amber rv d2"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">Free Will Debate</div><div class="card-cn">自由意志之争</div></div></div><p>Libet (1983): brain activity precedes conscious decision by ~350ms. Does the brain decide before "you" do? Compatibilists say free will is compatible with determinism. The debate remains unresolved — and may be the deepest question in all of science.</p><div class="cn-text">利贝特（1983）：大脑活动比有意识的决定早约350毫秒。大脑是否在"你"之前做出决定？相容论者认为自由意志与决定论相容。这场辩论仍未解决——可能是所有科学中最深层的问题。</div></div>
+
+    <div class="card c-amber rv"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">Psychedelics &amp; Consciousness</div><div class="card-cn">致幻剂与意识</div></div></div><p>Psilocybin, LSD, and DMT dissolve the default mode network, creating ego dissolution and "oceanic boundlessness." FDA breakthrough therapy for depression (psilocybin). These molecules may be the most powerful tools for studying consciousness itself.</p><div class="cn-text">裸盖菇素、LSD和DMT溶解默认模式网络，产生自我消融和"海洋般的无界感"。FDA突破性疗法用于抑郁症（裸盖菇素）。这些分子可能是研究意识本身最强大的工具。</div></div>
+
+    <div class="card c-amber rv d1"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">AI Consciousness</div><div class="card-cn">AI意识</div></div></div><p>Can machines be conscious? Chinese Room argument (Searle) says no — syntax ≠ semantics. IIT says it depends on architecture — current LLMs may have near-zero Φ. The question becomes urgent as AI systems become increasingly sophisticated. No consensus exists.</p><div class="cn-text">机器能有意识吗？中文房间论证（塞尔）说不能——语法≠语义。IIT说取决于架构——当前LLM可能Φ接近零。随着AI系统日益复杂，这个问题变得紧迫。目前没有共识。</div></div>
+
+    <div class="card c-amber rv d2"><div class="card-head"><span class="card-icon">&#10024;</span><div><div class="card-name">The Hard Problem</div><div class="card-cn">意识的困难问题</div></div></div><p>David Chalmers (1995): why does physical processing give rise to subjective experience? We can explain neural correlates of consciousness, but not why there is "something it is like" to be conscious. The explanatory gap between brain and mind remains the deepest mystery in science.</p><div class="cn-text">大卫·查尔莫斯（1995）：为什么物理处理会产生主观体验？我们可以解释意识的神经关联，但无法解释为什么存在"作为某物的感觉"。大脑与心智之间的解释鸿沟仍是科学中最深层的奥秘。</div></div>
+  </div>
+</section>
+
+<footer>
+  <p>Brain Atlas &mdash; 人脑完全图谱</p>
+  <p style="margin-top:4px;opacity:.4;">&copy; 2026</p>
+  <p style="margin-top:.8rem;"><a href="https://github.com/gewenbo888/brain-atlas" target="_blank" style="color:var(--dim);font-size:.68rem;letter-spacing:.08em;text-decoration:none;border:1px solid var(--faint);padding:6px 16px;border-radius:100px;transition:all .3s;display:inline-block;" onmouseover="this.style.borderColor='rgba(232,160,200,.3)';this.style.color='var(--pink)'" onmouseout="this.style.borderColor='var(--faint)';this.style.color='var(--dim)'">View on GitHub &rarr;</a></p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.05});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Nav active
+const tabs=document.querySelectorAll('.nav-tab');
+const secs=document.querySelectorAll('section[id]:not(#hero)');
+const navObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.getAttribute('href')==='#'+e.target.id));}});
+},{threshold:.12,rootMargin:'-48px 0px -40% 0px'});
+secs.forEach(s=>navObs.observe(s));
+
+// Hero neural network canvas
+(function(){
+  const c=document.getElementById('heroCanvas');
+  const ctx=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  const nodes=Array.from({length:60},()=>({
+    x:Math.random()*2000,y:Math.random()*2000,
+    vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,
+    r:1.5+Math.random()*2,
+    color:['#e8a0c8','#80b0e8','#a8e0a0','#e8c880','#b090e8'][Math.floor(Math.random()*5)]
+  }));
+  // Synaptic pulses
+  const pulses=[];
+  function addPulse(){
+    if(pulses.length>15)return;
+    const a=Math.floor(Math.random()*nodes.length);
+    let b=Math.floor(Math.random()*nodes.length);
+    if(a===b)b=(a+1)%nodes.length;
+    const dx=nodes[a].x-nodes[b].x,dy=nodes[a].y-nodes[b].y;
+    if(Math.sqrt(dx*dx+dy*dy)<200){
+      pulses.push({a,b,t:0,speed:.02+Math.random()*.02,color:nodes[a].color});
+    }
+  }
+  setInterval(addPulse,300);
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(n=>{
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0)n.x=W;if(n.x>W)n.x=0;if(n.y<0)n.y=H;if(n.y>H)n.y=0;
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=n.color;ctx.globalAlpha=.15;ctx.fill();ctx.globalAlpha=1;
+    });
+    // Connections
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle=nodes[i].color;ctx.globalAlpha=.03*(1-d/120);ctx.lineWidth=.5;ctx.stroke();ctx.globalAlpha=1;
+        }
+      }
+    }
+    // Pulses
+    for(let i=pulses.length-1;i>=0;i--){
+      const p=pulses[i];
+      p.t+=p.speed;
+      if(p.t>1){pulses.splice(i,1);continue;}
+      const na=nodes[p.a],nb=nodes[p.b];
+      const x=na.x+(nb.x-na.x)*p.t;
+      const y=na.y+(nb.y-na.y)*p.t;
+      const alpha=Math.sin(p.t*Math.PI)*.4;
+      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);
+      ctx.fillStyle=p.color;ctx.globalAlpha=alpha;ctx.fill();ctx.globalAlpha=1;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
